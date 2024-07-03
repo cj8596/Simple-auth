@@ -1,6 +1,7 @@
 package com.cristin.simpleauth.service;
 
 import com.cristin.simpleauth.dto.LoginDto;
+import com.cristin.simpleauth.dto.RolesDto;
 import com.cristin.simpleauth.dto.SignUpDto;
 import com.cristin.simpleauth.entity.Role;
 import com.cristin.simpleauth.entity.User;
@@ -77,4 +78,20 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return tokenProvider.generateToken(authentication);
     }
+
+    public String createRole(RolesDto rolesDto) {
+        // Check if username already exists
+        if (roleRepository.existsByName(rolesDto.getName())) {
+            return "Role is already present!";
+        }
+
+        Role role = new Role();
+        role.setName(rolesDto.getName());
+
+        // Save role to database
+        roleRepository.save(role);
+
+        return "User registered successfully";
+    }
+
 }

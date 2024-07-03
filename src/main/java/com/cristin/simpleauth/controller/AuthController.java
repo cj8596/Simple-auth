@@ -1,6 +1,7 @@
 package com.cristin.simpleauth.controller;
 
 import com.cristin.simpleauth.dto.LoginDto;
+import com.cristin.simpleauth.dto.RolesDto;
 import com.cristin.simpleauth.dto.SignUpDto;
 import com.cristin.simpleauth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +37,10 @@ public class AuthController {
     public ResponseEntity<String> registerUser(@RequestBody SignUpDto signUpDto) {
         return new ResponseEntity<>(authService.registerUser(signUpDto),HttpStatus.OK);
     }
+
+    @PostMapping("/creatingroles")
+    public ResponseEntity<String> registerUser(@RequestBody RolesDto rolesDto) {
+        return new ResponseEntity<>(authService.createRole(rolesDto),HttpStatus.OK);
+    }
+
 }
